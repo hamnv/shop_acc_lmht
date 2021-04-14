@@ -1,55 +1,133 @@
 * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 body {
-    background-color: rgb(56, 55, 55);
-    margin: auto;
+  background-color: rgb(56, 55, 55);
+  margin: auto;
 }
 .before-nav {
-    position: relative;
-    width: auto;
-    height: 60px;
-    color: aliceblue;
-    padding-top: 8px;
-    text-align: center;
+  position: relative;
+  width: auto;
+  height: 60px;
+  color: aliceblue;
+  padding-top: 8px;
+  text-align: center;
 }
 .nav-wrapper {
-    padding: 0;
-    margin: 0;
-    font-weight: bold;
-    color: rgb(233, 194, 23);
-    background-color: rgb(29, 27, 31);
-    width: auto;
-    height: 70px;
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  color: rgb(233, 194, 23);
+  background-color: rgb(29, 27, 31);
+  width: auto;
+  height: 70px;
 }
 .nav-wrapper img {
-    position: absolute;
-    height: 50px;
-    margin-top: 10px;
-    left: 30px;
+  position: absolute;
+  height: 50px;
+  margin-top: 10px;
+  left: 30px;
 }
 .nav-wrapper img:hover {
-    transform: scale(1);
+  transform: scale(1.05);
 }
 .nav-wrapper ul li a {
-    color: rgb(219, 165, 28);
+  color: rgb(219, 165, 28);
 }
 .nav-wrapper ul {
-    margin-left: 250px;
+  margin-left: 250px;
 }
 .nav-wrapper li {
-    margin: 0px 10px 0px 10px;
+  margin: 0;
 }
 .nav-wrapper li a:hover {
-    background-color: rgb(90, 89, 86);
+  background-color: rgb(83, 83, 79);
 }
 .login-btn {
-    background-color: rgb(47, 81, 145);
-    border-radius: 12px;
-    padding: 10px;
-    right: 50px;
-    margin-left: 200px;
+  background-color: rgb(47, 81, 145);
+  border-radius: 12px;
+  padding: 10px;
+  right: 50px;
+  margin-left: 200px;
+}
+.login-btn:hover{
+    background-color: rgb(71, 127, 231);
+}
+.banner {
+  position: relative;
+  height: 150px;
+  width: auto;
+}
+.sort {
+  width: 200px;
+  position: relative;
+  top: 0px;
+  left: 1100px;
+  color: aliceblue;
+  font-weight: bold;
+}
+.sort select {
+  display: inline-block !important;
+  width: 140px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(223, 217, 217);
+  font-weight: bold;
+}
+.row {
+  padding: 0px 100px 0px 100px;
+}
+.card {
+  margin-bottom: 100px !important;
+  height: 250px;
+  border-radius: 15px;
+  background-color: rgb(190, 190, 190);
+}
+.card-action {
+  font-weight: bold;
+}
+.card-action a {
+  color: rgb(151, 74, 29) !important;
+}
+.card-action a:hover {
+  color: rgb(236, 108, 33) !important;
+}
+.page-footer {
+  background-color:rgb(29, 27, 31);
+}
+.search-form{
+  height: 300px;
+  position: relative;
+  top: 50px;
+}
+.search-form label {
+  font-size: 20px;
+  color: aliceblue;
+  display: block;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.search-form select {
+  display: inline-block;
+  width: 150px;
+  margin: 0px 10px 0px 10px;
+}
+.search-form input[type=submit] {
+  display: block;
+  background-color: rgb(170, 101, 37);
+  color: white;
+  font-weight: bold;
+  padding: 15;
+  margin: 15;
+  border: none;
+  cursor: pointer;
+}
+.search-form input[type=submit]:hover {
+  background-color: rgb(94, 58, 26);
+  cursor: pointer;
 }
