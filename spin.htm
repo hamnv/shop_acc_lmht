@@ -1,0 +1,368 @@
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!--Import materialize.css-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="assets/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Acc Liên Minh Huyền Thoại</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style type="text/css">
+      text {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11px;
+        pointer-events: none;
+      }
+      #chart {
+        width: 500px;
+        height: 500px;
+        top: 0;
+        margin-left: 50px;
+      }
+      #question {
+        position: absolute;
+        width: 200px;
+        height: 170px;
+        top: 240px;
+        left: 550px;
+        color: aliceblue;
+        border: 5px solid orange;
+        padding: 10;
+      }
+      #question h1 {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+      }
+      #cost {
+        position: absolute;
+        width: 200px;
+        height: 170px;
+        top: 440px;
+        left: 550px;
+        color: rgb(238, 218, 34);
+        font-weight: bold;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="before-nav">
+      <p id="random_buyer">
+        Cảm ơn bạn<b> Louis Hàm </b> đã mua acc rank Bạch Kim, 345 skin.......
+      </p>
+    </div>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="index.htm"><img src="assets/logo.png" /></a>
+        <ul class="left hide-on-med-and-down">
+          <li><a href="index.htm">TRANG CHỦ</a></li>
+          <li><a href="search.htm">TÌM ACC NÂNG CAO</a></li>
+          <li><a href="purchase.htm">GIAO DỊCH</a></li>
+          <li><a href="spin.htm">VÒNG QUAY MAY MẮN</a></li>
+          <li><a href="support.htm">LIÊN HỆ - HỖ TRỢ</a></li>
+        </ul>
+        <a href="#" class="login-btn">Đăng nhập với Facebook</a>
+      </div>
+    </nav>
+    <main>
+      <div class="wrapper">
+        <div class="col s12 m9">
+          <div class="spin">
+            <div id="chart"></div>
+            <div id="question"><h1></h1></div>
+            <div id="cost">
+              <p>Phí quay: 50 điểm</p>
+              <p>Điểm còn lại: 150 điểm</p>
+            </div>
+            <script src="assets/js/d3.v3.min.js" charset="utf-8"></script>
+            <script type="text/javascript" charset="utf-8">
+              var padding = { top: 20, right: 40, bottom: 0, left: 0 },
+                w = 500 - padding.left - padding.right,
+                h = 500 - padding.top - padding.bottom,
+                r = Math.min(w, h) / 2,
+                rotation = 0,
+                oldrotation = 0,
+                picked = 100000,
+                oldpick = [],
+                color = d3.scale.category20();
+              var data = [
+                {
+                  label: "Chúc bạn may mắn lần sau !",
+                  value: 1,
+                  question: "Chúc bạn may mắn lần sau !",
+                },
+                {
+                  label: "Acc #450",
+                  value: 1,
+                  question: "Acc #450",
+                },
+                {
+                  label: "+ 50 điểm tích luỹ",
+                  value: 1,
+                  question: "+ 50 điểm tích luỹ",
+                }, //color
+                {
+                  label: "Voucher -20%",
+                  value: 1,
+                  question: "Voucher -20%",
+                }, //font-weight
+                {
+                  label: "Chúc bạn may mắn lần sau !",
+                  value: 1,
+                  question: "Chúc bạn may mắn lần sau !",
+                }, //font-size
+                {
+                  label: "Chơi thử Acc Full skin",
+                  value: 1,
+                  question: "Chơi thử Acc Full skin",
+                }, //background-color
+                {
+                  label: "Chúc bạn may mắn lần sau !",
+                  value: 1,
+                  question: "Chúc bạn may mắn lần sau !",
+                }, //nesting
+                {
+                  label: "Voucher giảm 15%",
+                  value: 1,
+                  question: "Voucher giảm 15%",
+                }, //bottom
+                {
+                  label: "+100 điểm tích luỹ",
+                  value: 1,
+                  question: "+100 điểm tích luỹ",
+                }, //sans-serif
+              ];
+
+              var svg = d3
+                .select("#chart")
+                .append("svg")
+                .data([data])
+                .attr("width", w + padding.left + padding.right)
+                .attr("height", h + padding.top + padding.bottom);
+
+              var container = svg
+                .append("g")
+                .attr("class", "chartholder")
+                .attr(
+                  "transform",
+                  "translate(" +
+                    (w / 2 + padding.left) +
+                    "," +
+                    (h / 2 + padding.top) +
+                    ")"
+                );
+
+              var vis = container.append("g");
+
+              var pie = d3.layout
+                .pie()
+                .sort(null)
+                .value(function (d) {
+                  return 1;
+                });
+
+              // declare an arc generator function
+              var arc = d3.svg.arc().outerRadius(r);
+
+              // select paths, use arc generator to draw
+              var arcs = vis
+                .selectAll("g.slice")
+                .data(pie)
+                .enter()
+                .append("g")
+                .attr("class", "slice");
+
+              arcs
+                .append("path")
+                .attr("fill", function (d, i) {
+                  return color(i);
+                })
+                .attr("d", function (d) {
+                  return arc(d);
+                });
+
+              // add the text
+              arcs
+                .append("text")
+                .attr("transform", function (d) {
+                  d.innerRadius = 0;
+                  d.outerRadius = r;
+                  d.angle = (d.startAngle + d.endAngle) / 2;
+                  return (
+                    "rotate(" +
+                    ((d.angle * 180) / Math.PI - 90) +
+                    ")translate(" +
+                    (d.outerRadius - 10) +
+                    ")"
+                  );
+                })
+                .attr("text-anchor", "end")
+                .text(function (d, i) {
+                  return data[i].label;
+                });
+
+              container.on("click", spin);
+
+              function spin(d) {
+                container.on("click", null);
+
+                //all slices have been seen, all done
+                console.log(
+                  "OldPick: " + oldpick.length,
+                  "Data length: " + data.length
+                );
+                if (oldpick.length == data.length) {
+                  console.log("done");
+                  container.on("click", null);
+                  return;
+                }
+
+                var ps = 360 / data.length,
+                  pieslice = Math.round(1440 / data.length),
+                  rng = Math.floor(Math.random() * 1440 + 360);
+
+                rotation = Math.round(rng / ps) * ps;
+
+                picked = Math.round(data.length - (rotation % 360) / ps);
+                picked = picked >= data.length ? picked % data.length : picked;
+
+                if (oldpick.indexOf(picked) !== -1) {
+                  d3.select(this).call(spin);
+                  return;
+                } else {
+                  oldpick.push(picked);
+                }
+
+                rotation += 90 - Math.round(ps / 2);
+
+                vis
+                  .transition()
+                  .duration(3000)
+                  .attrTween("transform", rotTween)
+                  .each("end", function () {
+                    //mark question as seen
+                    d3.select(
+                      ".slice:nth-child(" + (picked + 1) + ") path"
+                    ).attr("fill", "#111");
+
+                    //populate question
+                    d3.select("#question h1").text(data[picked].question);
+
+                    oldrotation = rotation;
+
+                    container.on("click", spin);
+                  });
+              }
+
+              //make arrow
+              svg
+                .append("g")
+                .attr(
+                  "transform",
+                  "translate(" +
+                    (w + padding.left + padding.right) +
+                    "," +
+                    (h / 2 + padding.top) +
+                    ")"
+                )
+                .append("path")
+                .attr(
+                  "d",
+                  "M-" + r * 0.15 + ",0L0," + r * 0.05 + "L0,-" + r * 0.05 + "Z"
+                )
+                .style({ fill: "orange" });
+
+              //draw spin circle
+              container
+                .append("circle")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", 60)
+                .style({ fill: "white", cursor: "pointer" });
+
+              //spin text
+              container
+                .append("text")
+                .attr("x", 0)
+                .attr("y", 15)
+                .attr("text-anchor", "middle")
+                .text("QUAY")
+                .style({ "font-weight": "bold", "font-size": "30px" });
+
+              function rotTween(to) {
+                var i = d3.interpolate(oldrotation % 360, rotation);
+                return function (t) {
+                  return "rotate(" + i(t) + ")";
+                };
+              }
+
+              function getRandomNumbers() {
+                var array = new Uint16Array(1000);
+                var scale = d3.scale
+                  .linear()
+                  .range([360, 1440])
+                  .domain([0, 100000]);
+
+                if (
+                  window.hasOwnProperty("crypto") &&
+                  typeof window.crypto.getRandomValues === "function"
+                ) {
+                  window.crypto.getRandomValues(array);
+                  console.log("works");
+                } else {
+                  //no support for crypto, get crappy random numbers
+                  for (var i = 0; i < 1000; i++) {
+                    array[i] = Math.floor(Math.random() * 100000) + 1;
+                  }
+                }
+
+                return array;
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="orange-text">ShopAccLMHT</h5>
+            <p class="orange-text text-lighten-4">
+              Uy tín chất lượng được đặt lên hàng đầu.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="orange-text">Liên kết</h5>
+            <ul>
+              <li>
+                <a class="orange-text text-lighten-3" href="#!">Fanpage</a>
+              </li>
+              <li>
+                <a class="orange-text text-lighten-3" href="#!">Trang LMHT</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">© 2021 by Louis Ham</div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+  </body>
+</html>
